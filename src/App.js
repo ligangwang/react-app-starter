@@ -8,7 +8,7 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 import {Provider} from 'react-redux';
 import {ListItems, PostItem} from './Item';
-import store from './store';
+import store from './Data/store';
 
 const firebaseConfig = require('./firebase-config.json');
 const firebaseApp = firebase.initializeApp(firebaseConfig);

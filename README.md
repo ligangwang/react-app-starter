@@ -50,3 +50,4 @@ firebase deploy
 ## Features
 - [Create React App](https://github.com/facebookincubator/create-react-app)
 - [firebaseui-web-react](https://github.com/firebase/firebaseui-web-react)
+- [redux](https://github.com/reactjs/redux/tree/master/docs)

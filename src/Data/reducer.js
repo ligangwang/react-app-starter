@@ -1,11 +1,13 @@
-import {FETCH_ITEMS, POST_ITEM} from './Items'
+import {FETCH_ITEMS, POST_ITEM} from '../Item'
+import {combineReducers} from 'redux';
+
 
 const initialState = {
   items: [],
   item: {}
 }
 
-export default function(state=initialState, action){
+const itemReducer = function(state=initialState, action){
   switch (action.type) {
     case FETCH_ITEMS:
       return {
@@ -20,4 +22,9 @@ export default function(state=initialState, action){
     default:
       return state;
   }
-}
+};
+
+
+export default combineReducers({
+  items: itemReducer
+});
