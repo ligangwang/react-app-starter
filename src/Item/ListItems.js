@@ -38,8 +38,8 @@ ListItems.propTypes = {
 
 const mapStateToProps = function(state){
   return {
-    items: state.items.items,
-    newItem: state.items.item
+    items: state.itemState.items,
+    newItem: state.itemState.item
 }};
 
 export default connect(mapStateToProps, {fetchItems})(ListItems);

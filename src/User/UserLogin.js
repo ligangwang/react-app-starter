@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import {firebase, firebaseApp} from '../firebase'
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {changeLoginState} from './UserAction'
 
 class UserLogin extends Component{
   uiConfig = {
@@ -13,14 +16,11 @@ class UserLogin extends Component{
     },
   };
 
-  state = {
-    isSignedIn : null,
-  };
-
   componentDidMount(){
     try{
       this.unregisterAuthObserver = firebaseApp.auth().onAuthStateChanged((user)=>{
-          this.setState({isSignedIn : !!user});
+          //this.setState({isSignedIn : !!user});
+          this.props.changeLoginState(!!user);
       });
     }catch(error){
       this.unregisterAuthObserver = null;
@@ -35,11 +35,11 @@ class UserLogin extends Component{
   render(){
     return (
       <div>
-        {!this.state.isSignedIn &&
+        {!this.props.isSignedIn &&
             <StyledFirebaseAuth className="App-intro" uiConfig={this.uiConfig}
                                 firebaseAuth={firebaseApp.auth()}/>
         }
-        {this.state.isSignedIn &&
+        {this.props.isSignedIn &&
             <div>
             <a className="Button" onClick={() => firebaseApp.auth().signOut()}>Logout</a>
             <br/><br/>Hello {firebaseApp.auth().currentUser.displayName}
@@ -50,4 +50,14 @@ class UserLogin extends Component{
   }
 }
 
-export default UserLogin;
+UserLogin.propTypes = {
+  changeLoginState: PropTypes.func.isRequired,
+  isSignedIn: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = function(state){
+  return {
+    isSignedIn: state.userState.isSignedIn,
+}};
+
+export default connect(mapStateToProps, {changeLoginState})(UserLogin);

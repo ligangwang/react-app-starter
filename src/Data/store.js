@@ -1,9 +1,15 @@
-import {createStore, applyMiddleware, compose} from 'redux';
+import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './reducer';
+import {ItemReducer} from '../Item'
+import {UserReducer} from '../User'
 
 const initialState = {};
 const middleware = [thunk];
+
+const rootReducer = combineReducers({
+  itemState: ItemReducer,
+  userState: UserReducer
+});
 
 const store = createStore(
     rootReducer,
