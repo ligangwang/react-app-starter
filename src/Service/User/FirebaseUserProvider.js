@@ -1,4 +1,4 @@
-import {firebase, firebaseApp} from '../firebase'
+import {firebase} from '../firebase'
 
 class FirebaseUserProvider{
   logIn(onSignedInOut){
