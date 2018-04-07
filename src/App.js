@@ -5,10 +5,7 @@ import './App.css';
 import {Provider} from 'react-redux';
 import {ListItems, PostItem} from './Item';
 import {UserLogin} from './User'
-import store from './Data/store';
-
-import {firebase, firebaseApp} from './firebase'
-
+import store from './store';
 
 class App extends Component {
   render() {
