@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import {ListItems, PostItem} from './Item';
 import {UserLogin} from './User'
 import store from './store';
+import firebaseItemProvider from './Service/Item/FirebaseItemProvider'
 
 class App extends Component {
   render() {
@@ -17,8 +18,8 @@ class App extends Component {
             <h1 className="App-title">Welcome to React App Starter</h1>
           </header>
           <UserLogin/>
-          <PostItem/>
-          <ListItems/>
+          <PostItem serviceProvider={firebaseItemProvider}/>
+          <ListItems serviceProvider={firebaseItemProvider}/>
         </div>
       </Provider>
     );

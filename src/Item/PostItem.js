@@ -26,7 +26,7 @@ class PostItem extends Component{
       body: this.state.body
     }
     //action
-    this.props.postItem(item);
+    this.props.postItem(this.props.serviceProvider, item);
   }
 
   render(){

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 class ListItems extends Component{
   componentWillMount(){
-    this.props.fetchItems();
+    this.props.fetchItems(this.props.serviceProvider);
   }
 
   componentWillReceiveProps(nextProps){
