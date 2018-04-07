@@ -3,23 +3,23 @@ const db = firebase.firestore();
 
 class FirebaseItemProvider{
   getItems(){
+    const itemQuery = db.collection('items').orderBy('createdOn', 'desc').limit(20);
     return (
-      fetch("http://jsonplaceholder.typicode.com/posts")
-      .then(res=>res.json())
+      itemQuery.get()
+      .then(snapshot =>
+        snapshot.docs.map(docSnapshot=>docSnapshot.data())
+      )
     );
   }
 
   putItem(item){
-    return (
-      fetch("http://jsonplaceholder.typicode.com/posts", {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json'
-      },
-      body: JSON.stringify(item)
-      })
-      .then(res=>res.json())
-    );
+    const new_item = {
+      ...item,
+      createdOn: firebase.firestore.FieldValue.serverTimestamp()
+    };
+    return db.collection('items').add(new_item)
+    .then(docRef=>docRef.get())
+    .then(docSnapshot=>docSnapshot.data());
   }
 }
 

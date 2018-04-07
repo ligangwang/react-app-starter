@@ -8,7 +8,7 @@ class PostItem extends Component{
     super(props);
     this.state = {
       title: "",
-      body: ""
+      summary: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -23,7 +23,8 @@ class PostItem extends Component{
     e.preventDefault();
     const item = {
       title: this.state.title,
-      body: this.state.body
+      summary: this.state.summary,
+      url: this.state.url
     }
     //action
     this.props.postItem(this.props.serviceProvider, item);
@@ -32,7 +33,7 @@ class PostItem extends Component{
   render(){
     return (
       <div>
-        <h1>Post Item</h1>
+        <h1>Post</h1>
         <form onSubmit={this.onSubmit}>
           <div>
             <label>Title: </label>
@@ -40,8 +41,13 @@ class PostItem extends Component{
           </div>
           <br/>
           <div>
-            <label>Body: </label>
-            <textarea name="body" onChange={this.onChange} value={this.state.body}/>
+            <label>Summary: </label>
+            <textarea name="body" onChange={this.onChange} value={this.state.summary}/>
+          </div>
+          <br/>
+          <div>
+            <label>Url: </label>
+            <input type="text" name="url" onChange={this.onChange} value={this.state.url}/>
           </div>
           <br/>
           <button type="submit">Submit</button>

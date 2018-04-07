@@ -18,7 +18,8 @@ class ListItems extends Component{
     const items = this.props.items.map(item=>(
         <div key={item.id}>
           <h3>{item.title}</h3>
-          <p>{item.body}</p>
+          <p>{item.summary}</p>
+          <p>{item.url}</p>
         </div>
     ));
     return (
