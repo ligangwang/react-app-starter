@@ -8,7 +8,8 @@ class PostItem extends Component{
     super(props);
     this.state = {
       title: "",
-      summary: ""
+      summary: "",
+      url: ""
     };
 
     this.onChange = this.onChange.bind(this);
@@ -42,7 +43,7 @@ class PostItem extends Component{
           <br/>
           <div>
             <label>Summary: </label>
-            <textarea name="body" onChange={this.onChange} value={this.state.summary}/>
+            <textarea name="summary" onChange={this.onChange} value={this.state.summary}/>
           </div>
           <br/>
           <div>

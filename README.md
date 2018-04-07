@@ -11,7 +11,7 @@ npm install
 - Sign in [firebase console](https://console.firebase.google.com)
 - Add a project to the console
 - Click "Add Firebase to your web app"
-- Copy contents of config into a json format saved as "firebase-config.json" under "src/firebase" folder. It looks like the following:
+- Copy contents of config into a json format saved as "firebase-config.json" under "src/Service/firebase" folder. It looks like the following:
 ```json
 {
   "apiKey": "your_project_api_key",
