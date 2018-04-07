@@ -1,13 +1,13 @@
-import {CHANGE_LOGIN_STATE} from './UserAction'
+import {CHANGE_USER} from './UserAction'
 
-const initialState = {isSignedIn:null};
+const initialState = {user:null};
 
 const UserReducer = function(state=initialState, action){
   switch (action.type) {
-    case CHANGE_LOGIN_STATE:
+    case CHANGE_USER:
       return {
         ...state,
-        isSignedIn: action.change
+        user: action.change
       }
     default:
       return state;

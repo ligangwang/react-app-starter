@@ -1,48 +1,30 @@
 import React, {Component} from 'react'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
-import {firebase, firebaseApp} from '../firebase'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {changeLoginState} from './UserAction'
+import {changeUser} from './UserAction'
 
 class UserLogin extends Component{
-  uiConfig = {
-    signInFlow: 'popup',
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      signInSuccess: ()=>false,
-    },
-  };
+  constructor(props){
+    super(props);
 
-  componentDidMount(){
-    try{
-      this.unregisterAuthObserver = firebaseApp.auth().onAuthStateChanged((user)=>{
-          //this.setState({isSignedIn : !!user});
-          this.props.changeLoginState(!!user);
-      });
-    }catch(error){
-      this.unregisterAuthObserver = null;
-    }
+    this.onSignedInOut = this.onSignedInOut.bind(this);
   }
 
-  componentWillUnmount(){
-    if (this.unregisterAuthObserver)
-      this.unregisterAuthObserver();
+
+  onSignedInOut(user){
+    this.props.changeUser(user);
   }
 
   render(){
     return (
       <div>
-        {!this.props.isSignedIn &&
-            <StyledFirebaseAuth className="App-intro" uiConfig={this.uiConfig}
-                                firebaseAuth={firebaseApp.auth()}/>
+        {!this.props.user &&
+          <a className="Button" onClick={() => this.props.serviceProvider.logIn(this.onSignedInOut)}>Login with Google</a>
         }
-        {this.props.isSignedIn &&
+        {this.props.user &&
             <div>
-            <a className="Button" onClick={() => firebaseApp.auth().signOut()}>Logout</a>
-            <br/><br/>Hello {firebaseApp.auth().currentUser.displayName}
+            <a className="Button" onClick={() => this.props.serviceProvider.logOut(this.onSignedInOut)}>Logout</a>
+            <br/><br/>Hello {this.props.user.displayName}
             </div>
         }
       </div>
@@ -51,13 +33,13 @@ class UserLogin extends Component{
 }
 
 UserLogin.propTypes = {
-  changeLoginState: PropTypes.func.isRequired,
-  isSignedIn: PropTypes.bool.isRequired
+  changeUser: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired
 };
 
 const mapStateToProps = function(state){
   return {
-    isSignedIn: state.userState.isSignedIn,
+    user: state.userState.user,
 }};
 
-export default connect(mapStateToProps, {changeLoginState})(UserLogin);
+export default connect(mapStateToProps, {changeUser})(UserLogin);

@@ -1,8 +1,8 @@
-export const CHANGE_LOGIN_STATE = 'CHANGE_LOGIN_STATE';
+export const CHANGE_USER = 'CHANGE_USER';
 
-export const changeLoginState = (isSignedIn) => (dispatch) => {
+export const changeUser = (user) => (dispatch) => {
   dispatch({
-    type: CHANGE_LOGIN_STATE,
-    change: isSignedIn
+    type: CHANGE_USER,
+    change: user
   });
 }
