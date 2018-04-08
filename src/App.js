@@ -7,46 +7,36 @@ import {UserLogin} from './User'
 import store from './store'
 import firebaseItemProvider from './Service/Item/FirebaseItemProvider'
 import firebaseUserProvider from './Service/User/FirebaseUserProvider'
-import styled, { keyframes } from 'styled-components'
-
-const Main = styled.div`
-  text-align: center;
-`
-
-const Header = styled.header`
-  background-color: #BBB;
-  height: 150px;
-  padding: 20px;
-  color: white;
-  > h1 {
-    font-size: 1.5em;
-    color: white;
-  }
-`
-const spin = keyframes`
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-`
-
-const Logo = styled.img`
-  animation: ${ spin } infinite 20s linear;
-  height: 80px;
-`
-
+import './App.css'
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Main>
-          <Header>
-            <Logo src={logo} alt="logo" />
-            <h1>Welcome to React App Starter</h1>
-          </Header>
-          <UserLogin serviceProvider={firebaseUserProvider}/>
-          <PostItem serviceProvider={firebaseItemProvider}/>
-          <ListItems serviceProvider={firebaseItemProvider}/>
-        </Main>
+        <div className="wrapper">
+          <header className="main-header">
+            <div className="main-header-logo">
+              <img src={logo} alt="logo" />
+            </div>
+            <div className="main-header-login">
+              <UserLogin serviceProvider={firebaseUserProvider}/>
+            </div>
+          </header>
+          <nav className="main-nav">
+              <ul>
+                  <li><a href="">Nav 1</a></li>
+                  <li><a href="">Nav 2</a></li>
+                  <li><a href="">Nav 3</a></li>
+              </ul>
+          </nav>
+          <div className="main-content">
+            <PostItem serviceProvider={firebaseItemProvider}/>
+            <ListItems serviceProvider={firebaseItemProvider}/>
+          </div>
+          <aside className="main-sidebar">Sidebar</aside>
+          <div className="main-ad">ad</div>
+          <footer className="main-footer">&copy; 2018</footer>
+        </div>
       </Provider>
     );
   }

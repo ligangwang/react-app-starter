@@ -2,14 +2,8 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {changeUser} from './UserAction'
+import './user.css'
 
-import styled from 'styled-components'
-const LoginOut = styled.a`
-  cursor: pointer;
-  color: blue;
-  text-decoration: underline;
-  margin-top: 10px;
-`
 
 class UserLogin extends Component{
   constructor(props){
@@ -27,11 +21,11 @@ class UserLogin extends Component{
     return (
       <div>
         {!this.props.user &&
-          <LoginOut onClick={() => this.props.serviceProvider.logIn(this.onSignedInOut)}>Login with Google</LoginOut>
+          <a className="user-login" onClick={() => this.props.serviceProvider.logIn(this.onSignedInOut)}>Login with Google</a>
         }
         {this.props.user &&
             <div>
-            <LoginOut onClick={() => this.props.serviceProvider.logOut(this.onSignedInOut)}>Logout</LoginOut>
+            <a className="user-login" onClick={() => this.props.serviceProvider.logOut(this.onSignedInOut)}>Logout</a>
             <br/><br/>Hello {this.props.user.displayName}
             </div>
         }

@@ -34,7 +34,6 @@ class PostItem extends Component{
   render(){
     return (
       <div>
-        <h1>Post</h1>
         <form onSubmit={this.onSubmit}>
           <div>
             <label>Title: </label>
