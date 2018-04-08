@@ -4,11 +4,11 @@ import {fetchItems} from './ListItemAction';
 import PropTypes from 'prop-types';
 
 class ListItems extends Component{
-  componentWillMount(){
+  UNSAFE_componentWillMount(){
     this.props.fetchItems(this.props.serviceProvider);
   }
 
-  componentWillReceiveProps(nextProps){
+  UNSAFE_componentWillReceiveProps(nextProps){
       if(nextProps.newItem){
         this.props.items.unshift(nextProps.newItem);
       }

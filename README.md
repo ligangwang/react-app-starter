@@ -49,5 +49,7 @@ firebase deploy
 
 ## Features
 - [Create React App](https://github.com/facebookincubator/create-react-app)
-- [firebaseui-web-react](https://github.com/firebase/firebaseui-web-react)
+- [firebase auth](https://firebase.google.com/docs/auth/)
+- [firebase firestore](https://firebase.google.com/docs/reference/js/firebase.firestore)
 - [redux](https://github.com/reactjs/redux/tree/master/docs)
+- [styled-components](https://github.com/styled-components/styled-components)
