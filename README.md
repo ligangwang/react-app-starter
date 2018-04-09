@@ -52,3 +52,4 @@ firebase deploy
 - [firebase auth](https://firebase.google.com/docs/auth/)
 - [firebase firestore](https://firebase.google.com/docs/reference/js/firebase.firestore)
 - [redux](https://github.com/reactjs/redux/tree/master/docs)
+- [react-router](https://github.com/ReactTraining/react-router)

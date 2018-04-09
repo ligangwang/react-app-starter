@@ -23,7 +23,6 @@
 }
 .main-content {
   grid-area: content;
-  text-align: left;
 }
 .main-nav {
   grid-area: nav;
@@ -40,7 +39,7 @@
 }
 .wrapper {
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 10px;
   grid-template-areas:
     "header"
     "nav"
@@ -49,21 +48,26 @@
     "ad"
     "footer";
 }
+
 @media (min-width: 500px) {
   .wrapper {
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 4fr 1fr;
     grid-template-areas:
       "header  header"
       "nav     nav"
-      "sidebar content"
-      "ad      footer";
+      "content sidebar"
+      "footer ad";
   }
   nav ul {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
+  }
+  nav ul li{
+    margin-left: 10px;
   }
 }
-@media (min-width: 700px) {
+
+@media (min-width: 7000px) {
   .wrapper {
     grid-template-columns: 1fr 4fr 1fr;
     grid-template-areas:
@@ -88,9 +92,10 @@
 
 .main-header-logo img {
   animation: main-header-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 50px;
 }
 
 .main-header-login {
   float: right;
+  font-size: 0.7em;
 }
