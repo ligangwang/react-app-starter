@@ -8,7 +8,7 @@ import store from './store'
 import firebaseItemProvider from './Service/Item/FirebaseItemProvider'
 import firebaseUserProvider from './Service/User/FirebaseUserProvider'
 import './App.css'
-import {Link, Route} from 'react-router-dom'
+import {Link, Route, Switch} from 'react-router-dom'
 // <PostItem serviceProvider={firebaseItemProvider}/>
 const FirebasePostItem = (props) => <PostItem serviceProvider={firebaseItemProvider}/>
 const FirebaseListItems = (props) => <ListItems serviceProvider={firebaseItemProvider}/>
@@ -28,13 +28,15 @@ class App extends Component {
           </header>
           <nav className="main-nav">
               <ul>
-                  <li><Link to="/home">Home</Link></li>
+                  <li><Link to="/">Home</Link></li>
                   <li><Link to="/post">Post</Link></li>
               </ul>
           </nav>
           <div className="main-content">
-            <Route path="/post" component={FirebasePostItem}/>
-            <Route path="/home" component={FirebaseListItems}/>
+            <Switch>
+              <Route exact path="/" component={FirebaseListItems}/>
+              <Route path="/post" component={FirebasePostItem}/>
+            </Switch>
           </div>
           <aside className="main-sidebar"></aside>
           <div className="main-ad"></div>
