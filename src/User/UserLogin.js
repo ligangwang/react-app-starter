@@ -10,7 +10,6 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
-import googleLogin from './btn_google_signin_light_normal_web.png'
 
 class UserLogin extends Component{
   constructor(props){
@@ -34,6 +33,9 @@ class UserLogin extends Component{
     this.setState({ loginBoxOpen: false });
   };
 
+  handleLogoutClick=()=>{
+    this.props.serviceProvider.logOut(this.onUserChange);
+  }
   render(){
     return (
       <div>
@@ -59,7 +61,7 @@ class UserLogin extends Component{
         }
         {this.props.user &&
             <div>
-            <a className="user-login" onClick={() => this.props.serviceProvider.logOut(this.onUserChange)}>Logout</a>
+            <Button color="primary" onClick={this.handleLogoutClick}>Logout</Button>
             <br/><br/>Hello {this.props.user.displayName}
             </div>
         }
