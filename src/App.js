@@ -12,7 +12,7 @@ import {Link, Route, Switch} from 'react-router-dom'
 // <PostItem serviceProvider={firebaseItemProvider}/>
 const FirebasePostItem = (props) => <PostItem serviceProvider={firebaseItemProvider}/>
 const FirebaseListItems = (props) => <ListItems serviceProvider={firebaseItemProvider}/>
-
+const FirebaseUserLogin = (props) => <UserLogin serviceProvider={firebaseUserProvider}/>
 class App extends Component {
   render() {
     return (
@@ -23,7 +23,7 @@ class App extends Component {
               <img src={logo} alt="logo" />
             </div>
             <div className="main-header-login">
-              <UserLogin serviceProvider={firebaseUserProvider}/>
+              <FirebaseUserLogin/>
             </div>
           </header>
           <nav className="main-nav">
@@ -36,6 +36,7 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={FirebaseListItems}/>
               <Route path="/post" component={FirebasePostItem}/>
+              
             </Switch>
           </div>
           <aside className="main-sidebar"></aside>
