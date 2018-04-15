@@ -55,10 +55,10 @@ export default class ListItems2 extends PureComponent {
                 <List
                   ref={registerChild}
                   className="List"
-                  height={200}
+                  height={400}
                   onRowsRendered={onRowsRendered}
                   rowCount={items.length}
-                  rowHeight={30}
+                  rowHeight={40}
                   rowRenderer={this._rowRenderer}
                   width={width}
                 />

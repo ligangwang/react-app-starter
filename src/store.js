@@ -2,8 +2,10 @@ import {createStore, applyMiddleware, compose, combineReducers} from 'redux';
 import thunk from 'redux-thunk';
 import {ItemReducer} from './Item'
 import {UserReducer} from './User'
+import StateLoader from './StateLoader'
 
-const initialState = {};
+const stateLoader = new StateLoader();
+const initialState = stateLoader.loadState();
 const middleware = [thunk];
 
 const rootReducer = combineReducers({
@@ -20,4 +22,7 @@ const store = createStore(
     )
 );
 
+store.subscribe(() => {
+    stateLoader.saveState(store.getState());
+});
 export default store;

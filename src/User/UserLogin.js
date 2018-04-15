@@ -21,6 +21,7 @@ class UserLogin extends Component{
     };
 
   onUserChange = user => {
+    console.log(`change user: ${user}`)
     this.handleLoginClose();
     this.props.changeUser(user);
   }
@@ -37,6 +38,8 @@ class UserLogin extends Component{
     this.props.serviceProvider.logOut(this.onUserChange);
   }
   render(){
+    console.log(`render with user: ${this.props.user}`)
+
     return (
       <div>
         {!this.props.user &&
