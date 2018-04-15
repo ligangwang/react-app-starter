@@ -62,7 +62,6 @@ class UserLogin extends Component{
         {this.props.user &&
             <div>
             <Button color="primary" onClick={this.handleLogoutClick}>Logout</Button>
-            <br/><br/>Hello {this.props.user.displayName}
             </div>
         }
       </div>

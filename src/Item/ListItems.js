@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchItems} from './ListItemAction';
 import PropTypes from 'prop-types';
+import Paper from 'material-ui/Paper'
+import Divider from 'material-ui/Divider'
+import Table, {TableHead, TableBody, TableRow, TableCell} from 'material-ui/Table'
 
 class ListItems extends Component{
   UNSAFE_componentWillMount(){
@@ -16,17 +19,20 @@ class ListItems extends Component{
 
   render(){
     const items = this.props.items.map(item=>(
-        <div key={item.id}>
-          <h3>{item.title}</h3>
-          <p>{item.summary}</p>
-          <p>{item.url}</p>
-        </div>
+        <TableRow key={item.id}>
+          <TableCell>{item.title}</TableCell>
+          <TableCell>{item.summary}</TableCell>
+          <TableCell>{item.url}</TableCell>
+        </TableRow>
     ));
     return (
-      <div>
-        <h1>Items</h1>
-        {items}
-      </div>
+        <Paper zDepth={1}>
+          <Table>
+            <TableBody>
+            {items}
+            </TableBody>
+          </Table>
+        </Paper>
     );
   }
 }

@@ -9,12 +9,21 @@ import firebaseItemProvider from './Service/Item/FirebaseItemProvider'
 import firebaseUserProvider from './Service/User/FirebaseUserProvider'
 import './App.css'
 import {Link, Route, Switch} from 'react-router-dom'
+import AppBar from 'material-ui/AppBar'
+import Tabs, {Tab} from 'material-ui/Tabs'
+import About from './About'
+import Button from 'material-ui/Button'
 // <PostItem serviceProvider={firebaseItemProvider}/>
-const FirebasePostItem = (props) => <PostItem serviceProvider={firebaseItemProvider}/>
-const FirebaseListItems = (props) => <ListItems serviceProvider={firebaseItemProvider}/>
-const FirebaseUserLogin = (props) => <UserLogin serviceProvider={firebaseUserProvider}/>
+const FirebasePostItem = (props) => <PostItem serviceProvider={firebaseItemProvider} props={props}/>
+const FirebaseListItems = (props) => <ListItems serviceProvider={firebaseItemProvider} props={props}/>
+const FirebaseUserLogin = (props) => <UserLogin serviceProvider={firebaseUserProvider} props={props}/>
+
 class App extends Component {
   render() {
+    // <ul>
+    //     <li><Link to="/">Home</Link></li>
+    //     <li><Link to="/post">Post</Link></li>
+    // </ul>
     return (
       <Provider store={store}>
         <div className="wrapper">
@@ -22,21 +31,27 @@ class App extends Component {
             <div className="main-header-logo">
               <img src={logo} alt="logo" />
             </div>
-            <div className="main-header-login">
-              <FirebaseUserLogin/>
+            <div className="main-header-command">
+              <div className="main-header-command-item">
+                <FirebasePostItem/>
+              </div>
+              <div className="main-header-command-item">
+                <FirebaseUserLogin/>
+              </div>
             </div>
           </header>
           <nav className="main-nav">
-              <ul>
-                  <li><Link to="/">Home</Link></li>
-                  <li><Link to="/post">Post</Link></li>
-              </ul>
+            <AppBar position="static">
+              <Tabs>
+                <Tab label="Home" component={Link} to="/"/>
+                <Tab label="About" component={Link} to="/about"/>
+              </Tabs>
+            </AppBar>
           </nav>
           <div className="main-content">
             <Switch>
               <Route exact path="/" component={FirebaseListItems}/>
-              <Route path="/post" component={FirebasePostItem}/>
-              
+              <Route path="/about" component={About}/>
             </Switch>
           </div>
           <aside className="main-sidebar"></aside>

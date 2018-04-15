@@ -1,5 +1,4 @@
-react-app-starter project demonstrates web application development using react components.<br>
-[Demo Online](https://react-web-app-starter.firebaseapp.com/)<br>
+react-app-starter project demonstrates web application development using react components.<br> [Demo Online](https://react-web-app-starter.firebaseapp.com/)<br>
 
 ## Clone project and install packages
 ```console
