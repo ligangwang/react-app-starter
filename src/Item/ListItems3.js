@@ -1,16 +1,17 @@
 import React, {Component} from 'react'
 import InfiniteList from './InfiniteList'
 import './ListItems3.css'
+import ListItem from 'material-ui';
 
 const applyUpdateResult = (result) => (prevState) => ({
-  hits: [...prevState.hits, ...result.hits],
+  items: [...prevState.items, ...result.hits],
   page: result.page,
   isError: false,
   isLoading: false,
 });
 
 const applySetResult = (result) => (prevState) => ({
-  hits: result.hits,
+  items: result.hits,
   page: result.page,
   isError: false,
   isLoading: false,
@@ -29,7 +30,7 @@ class ListItems3 extends Component {
     super(props);
 
     this.state = {
-      hits: [],
+      items: [],
       page: null,
       isLoading: false,
       isError: false,
@@ -89,7 +90,7 @@ class ListItems3 extends Component {
         </div>
 
         <InfiniteList
-          list={this.state.hits}
+          items={this.state.items}
           isError={this.state.isError}
           isLoading={this.state.isLoading}
           page={this.state.page}
@@ -101,3 +102,17 @@ class ListItems3 extends Component {
 }
 
 export default ListItems3
+// ListItems3.propTypes = {
+//   fetchItems: PropTypes.func.isRequired,
+//   items: PropTypes.array.isRequired,
+//   newItem: PropTypes.object,
+//   startAt: PropTypes.Number
+// }
+
+// const mapStateToProps = function(state){
+//   return {
+//     items: state.itemState.items,
+//     newItem: state.itemState.item,
+// }};
+
+// export default connect(mapStateToProps, {fetchItems})(ListItems3);
