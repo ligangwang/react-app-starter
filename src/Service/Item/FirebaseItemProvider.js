@@ -2,17 +2,29 @@ import {firebase} from '../firebase';
 const db = firebase.firestore();
 
 class FirebaseItemProvider{
-  getItems(){
-    const itemQuery = db.collection('items').orderBy('createdOn', 'desc').limit(20);
-    return (
-      itemQuery.get()
-      .then(snapshot =>
-        snapshot.docs.map(docSnapshot=>docSnapshot.data())
-      )
-    );
+  constructor(){
+    this.lastItem = null
   }
 
-  putItem(item){
+  getItems = (startIndex, endIndex)=>{
+    let itemQuery
+    if (startIndex==0) {
+      itemQuery = db.collection('items')
+      .orderBy('createdOn', 'desc')
+      .limit(endIndex-startIndex)
+    }
+    else{
+      itemQuery = db.collection('items')
+      .orderBy('createdOn', 'desc')
+      .startAfter(this.lastItem)
+      .limit(endIndex-startIndex)
+    }
+    return itemQuery.get().then(docSnapshots => {
+      this.lastItem = docSnapshots.docs[docSnapshots.docs.length-1];
+      return docSnapshots.docs.map(docSnapshots=>docSnapshots.data())})
+  }
+
+  putItem = (item)=>{
     const new_item = {
       ...item,
       createdOn: firebase.firestore.FieldValue.serverTimestamp()

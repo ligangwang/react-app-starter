@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 
 import {Provider} from 'react-redux'
-import {ListItems2, PostItem} from './Item'
+import {ListItems3, PostItem} from './Item'
 import {UserLogin} from './User'
 import store from './store'
 import firebaseItemProvider from './Service/Item/FirebaseItemProvider'
@@ -15,7 +15,7 @@ import About from './About'
 import Button from 'material-ui/Button'
 // <PostItem serviceProvider={firebaseItemProvider}/>
 const FirebasePostItem = (props) => <PostItem serviceProvider={firebaseItemProvider} props={props}/>
-const FirebaseListItems = (props) => <ListItems2 serviceProvider={firebaseItemProvider} props={props}/>
+const FirebaseListItems = (props) => <ListItems3 serviceProvider={firebaseItemProvider} props={props}/>
 const FirebaseUserLogin = (props) => <UserLogin serviceProvider={firebaseUserProvider} props={props}/>
 
 class App extends Component {
@@ -33,7 +33,6 @@ class App extends Component {
             </div>
             <div className="main-header-command">
               <div className="main-header-command-item">
-                <FirebasePostItem/>
               </div>
               <div className="main-header-command-item">
                 <FirebaseUserLogin/>

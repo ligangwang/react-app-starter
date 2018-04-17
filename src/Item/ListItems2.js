@@ -96,7 +96,7 @@ export default class ListItems2 extends PureComponent {
       loadingRowCount: loadingRowCount + increment,
     });
 
-    this.props.serviceProvider.getItems().then(returnItems => {
+    this.props.serviceProvider.getItems(startIndex, stopIndex).then(returnItems => {
       this.setState({items:returnItems})
       const {loadedRowCount, loadingRowCount} = this.state;
 
