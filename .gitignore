@@ -21,3 +21,5 @@ yarn-debug.log*
 yarn-error.log*
 
 /src/firebase/firebase-config.json
+
+admin.js

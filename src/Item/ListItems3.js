@@ -21,7 +21,6 @@ class ListItems3 extends Component {
     if (value === '') {
       return;
     }
-    console.log(`searching... ${value}`)
     this.requestToLoadItems(value, 0);
   }
 

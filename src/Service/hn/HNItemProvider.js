@@ -1,3 +1,4 @@
+import fetch from 'node-fetch'
 const PAGE_SIZE = 20
 const hitsToItems = (hits)=>(hits.map(hit=>({
   id: hit.objectID, 
@@ -10,13 +11,14 @@ class HNItemProvider{
     this.lastItem = null
   }
 
-  getItems = (searchValue, startAt, batchSize)=>{
+  getItems(searchValue, startAt, batchSize)
+  {
     return fetch(`https://hn.algolia.com/api/v1/search?query=${searchValue}&page=${startAt/PAGE_SIZE}&hitsPerPage=${batchSize}`)
     .then(response => response.json())
     .then(result=>hitsToItems(result.hits))
   }
 
-  putItem = (item)=>{
+  putItem (item){
   }
 }
 

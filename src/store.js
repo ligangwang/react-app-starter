@@ -5,7 +5,7 @@ import {UserReducer} from './User'
 import StateLoader from './StateLoader'
 
 const stateLoader = new StateLoader();
-const initialState = {}//stateLoader.loadState();
+const initialState = stateLoader.loadState();
 const middleware = [thunk];
 
 const rootReducer = combineReducers({
@@ -17,8 +17,8 @@ const store = createStore(
     rootReducer,
     initialState,
     compose(
-      applyMiddleware(...middleware),
-      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+      applyMiddleware(...middleware)
+      // ,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     )
 );
 
