@@ -11,12 +11,13 @@ const initialState = {
 const ItemReducer = function(state=initialState, action){
   switch (action.type) {
     case FETCH_ITEMS:
-      const {items, searchValue, startAt} = action.change
+      const {items, searchValue, startAt, hasMoreData} = action.change
       return {
           ...state,
           items: startAt === 0 ? items: [...state.items, ...items],
           searchValue: searchValue,
           startAt: startAt,
+          hasMoreData: hasMoreData,
           isLoading: false,
           isError: false
       }

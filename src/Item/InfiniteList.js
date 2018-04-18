@@ -65,7 +65,8 @@ const infiniteScrollCondition = props =>
   (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
   && props.items.length
   && !props.isLoading
-  && !props.isError;
+  && !props.isError
+  && props.hasMoreData;
 
 const loadingCondition = props =>
   props.isLoading;

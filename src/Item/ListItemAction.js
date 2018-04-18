@@ -5,9 +5,10 @@ export const SHOW_UI_LOADING = "SHOW_UI_LOADING";
 export const fetchItems = (serviceProvider, searchValue, startAt, batchSize) => (dispatch) => {
     serviceProvider.getItems(searchValue, startAt, batchSize)
     .then(items=>{
+      const hasMoreData = items.length === batchSize
       dispatch({
       type: FETCH_ITEMS,
-      change: {items, searchValue, startAt}
+      change: {items, searchValue, startAt, hasMoreData}
     })})
     .catch((prevState) => (dispatch({
       type: FETCH_ITEMS_ERROR

@@ -50,6 +50,7 @@ class ListItems3 extends Component {
           isLoading={this.props.isLoading}
           startAt={this.props.startAt}
           onLoadMore={this.onLoadMore}
+          hasMoreData={this.hasMoreData}
         />
       </div>
     );
@@ -73,7 +74,8 @@ const mapStateToProps = function(state){
     startAt: state.itemState.startAt,
     searchValue: state.itemState.searchValue,
     isLoading: state.itemState.isLoading,
-    isError: state.itemState.isError
+    isError: state.itemState.isError,
+    hasMoreData: state.itemState.hasMoreData
 }};
 
 export default connect(mapStateToProps, {fetchItems, showUILoading})(ListItems3);

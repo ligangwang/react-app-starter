@@ -6,18 +6,18 @@ class FirebaseItemProvider{
     this.lastItem = null
   }
 
-  getItems = (startIndex, endIndex)=>{
+  getItems = (searchValue, startAt, batchSize)=>{
     let itemQuery
-    if (startIndex===0) {
+    if (startAt===0) {
       itemQuery = db.collection('items')
       .orderBy('createdOn', 'desc')
-      .limit(endIndex-startIndex)
+      .limit(batchSize)
     }
     else{
       itemQuery = db.collection('items')
       .orderBy('createdOn', 'desc')
       .startAfter(this.lastItem)
-      .limit(endIndex-startIndex)
+      .limit(batchSize)
     }
     return itemQuery.get().then(docSnapshots => {
       this.lastItem = docSnapshots.docs[docSnapshots.docs.length-1];
