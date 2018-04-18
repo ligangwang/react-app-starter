@@ -1,7 +1,5 @@
 /** @flow */
 import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import Immutable from 'immutable';
 import {AutoSizer, InfiniteLoader, List} from 'react-virtualized';
 import './ListItems2.css';
 

@@ -2,20 +2,22 @@ import React, { Component } from 'react'
 import logo from './logo.svg'
 
 import {Provider} from 'react-redux'
-import {ListItems3, PostItem} from './Item'
+import {ListItems3} from './Item'
 import {UserLogin} from './User'
 import store from './store'
-import firebaseItemProvider from './Service/Item/FirebaseItemProvider'
-import firebaseUserProvider from './Service/User/FirebaseUserProvider'
+//import firebaseItemProvider from './Service/firebase/FirebaseItemProvider'
+import hnItemProvider from './Service/hn/HNItemProvider'
+import firebaseUserProvider from './Service/firebase/FirebaseUserProvider'
 import './App.css'
 import {Link, Route, Switch} from 'react-router-dom'
 import AppBar from 'material-ui/AppBar'
 import Tabs, {Tab} from 'material-ui/Tabs'
 import About from './About'
-import Button from 'material-ui/Button'
+//import Button from 'material-ui/Button'
 // <PostItem serviceProvider={firebaseItemProvider}/>
-const FirebasePostItem = (props) => <PostItem serviceProvider={firebaseItemProvider} props={props}/>
-const FirebaseListItems = (props) => <ListItems3 serviceProvider={firebaseItemProvider} props={props}/>
+//const FirebasePostItem = (props) => <PostItem serviceProvider={firebaseItemProvider} props={props}/>
+//const FirebaseListItems = (props) => <ListItems3 serviceProvider={firebaseItemProvider} props={props}/>
+const HNListItems = (props) => <ListItems3 serviceProvider={hnItemProvider} props={props}/>
 const FirebaseUserLogin = (props) => <UserLogin serviceProvider={firebaseUserProvider} props={props}/>
 
 class App extends Component {
@@ -49,7 +51,7 @@ class App extends Component {
           </nav>
           <div className="main-content">
             <Switch>
-              <Route exact path="/" component={FirebaseListItems}/>
+              <Route exact path="/" component={HNListItems}/>
               <Route path="/about" component={About}/>
             </Switch>
           </div>

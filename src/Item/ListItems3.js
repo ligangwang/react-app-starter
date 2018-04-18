@@ -1,118 +1,79 @@
 import React, {Component} from 'react'
 import InfiniteList from './InfiniteList'
 import './ListItems3.css'
-import ListItem from 'material-ui';
+import PropTypes from 'prop-types';
+import {fetchItems, showUILoading} from './ListItemAction'
+import {connect} from 'react-redux';
 
-const applyUpdateResult = (result) => (prevState) => ({
-  items: [...prevState.items, ...result.hits],
-  page: result.page,
-  isError: false,
-  isLoading: false,
-});
-
-const applySetResult = (result) => (prevState) => ({
-  items: result.hits,
-  page: result.page,
-  isError: false,
-  isLoading: false,
-});
-
-const applySetError = (prevState) => ({
-  isError: true,
-  isLoading: false,
-});
-
-const getHackerNewsUrl = (value, page) =>
-  `https://hn.algolia.com/api/v1/search?query=${value}&page=${page}&hitsPerPage=20`;
+const PAGE_SIZE = 20
 
 class ListItems3 extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      items: [],
-      page: null,
-      isLoading: false,
-      isError: false,
-      searchKey: "reactjs"
-    };
-  }
-
   componentDidMount(){
-    this.fetchStories('reactjs', 0);
+    this.input.value = "reactjs"
+    this.requestToLoadItems("reactjs", 0);
   }
 
 
-  onInitialSearch = (e) => {
+  onSearch = (e) => {
     e.preventDefault();
 
     const { value } = this.input;
-    this.setState({searchKey: value})
     if (value === '') {
       return;
     }
-
-    this.fetchStories(value, 0);
+    console.log(`searching... ${value}`)
+    this.requestToLoadItems(value, 0);
   }
 
-  onPaginatedSearch = (e) =>
-    this.fetchStories(this.input.value, this.state.page + 1);
-
-  fetchStories = (value, page) => {
-    this.setState({ isLoading: true });
-    fetch(getHackerNewsUrl(value, page))
-      .then(response => response.json())
-      .then(result => this.onSetResult(result, page))
-      .catch(this.onSetError);
+  requestToLoadItems=(searchValue, startAt)=>{
+    this.props.showUILoading()
+    this.props.fetchItems(this.props.serviceProvider, searchValue, startAt, PAGE_SIZE);
   }
+  onLoadMore = (e) =>
+    this.requestToLoadItems(this.props.searchValue, this.props.startAt + PAGE_SIZE);
 
-  onSetResult = (result, page) =>
-    page === 0
-      ? this.setState(applySetResult(result))
-      : this.setState(applyUpdateResult(result));
-
-  onSetError = () =>
-    this.setState(applySetError);
-
-  onSearchChange = (e) => {
-      this.setState({[e.target.name] : e.target.value});
-  }
-
+  
   render() {
 
     return (
       <div className="page">
         <div className="interactions">
-          <form type="submit" onSubmit={this.onInitialSearch}>
-            <input name="searchKey" type="text" ref={node => this.input = node} onChange={this.onSearchChange} value={this.state.searchKey}/>
+          <form type="submit" onSubmit={this.onSearch}>
+            <input name="searchValue" type="text" ref={node => this.input = node}/>
             <button type="submit">Search</button>
           </form>
         </div>
 
         <InfiniteList
-          items={this.state.items}
-          isError={this.state.isError}
-          isLoading={this.state.isLoading}
-          page={this.state.page}
-          onPaginatedSearch={this.onPaginatedSearch}
+          items={this.props.items}
+          isError={this.props.isError}
+          isLoading={this.props.isLoading}
+          startAt={this.props.startAt}
+          onLoadMore={this.onLoadMore}
         />
       </div>
     );
   }
 }
 
-export default ListItems3
-// ListItems3.propTypes = {
-//   fetchItems: PropTypes.func.isRequired,
-//   items: PropTypes.array.isRequired,
-//   newItem: PropTypes.object,
-//   startAt: PropTypes.Number
-// }
+ListItems3.propTypes = {
+  fetchItems: PropTypes.func.isRequired,
+  items: PropTypes.array.isRequired,
+  newItem: PropTypes.object,
+  startAt: PropTypes.number,
+  isLoading: PropTypes.bool,
+  isError: PropTypes.bool,
+  searchValue: PropTypes.string
+}
 
-// const mapStateToProps = function(state){
-//   return {
-//     items: state.itemState.items,
-//     newItem: state.itemState.item,
-// }};
+const mapStateToProps = function(state){
+  return {
+    items: state.itemState.items,
+    newItem: state.itemState.item,
+    startAt: state.itemState.startAt,
+    searchValue: state.itemState.searchValue,
+    isLoading: state.itemState.isLoading,
+    isError: state.itemState.isError
+}};
 
-// export default connect(mapStateToProps, {fetchItems})(ListItems3);
+export default connect(mapStateToProps, {fetchItems, showUILoading})(ListItems3);

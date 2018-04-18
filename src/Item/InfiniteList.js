@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {compose} from 'redux'
 
 
-const List = ({ items }) =>
-  <div className="list">
-    {items.map(item => <div className="list-row" key={item.objectID}>
+const List = ({ items }) => {
+  return <div className="list">
+    {items.map(item => <div className="list-row" key={item.id}>
       <a href={item.url} target="_blank">{item.title}</a>
     </div>)}
   </div>
-
+}
 const withLoading = (conditionFn) => (Component) => (props) =>
   <div>
     <Component {...props} />
@@ -31,7 +31,7 @@ const withPaginated = (conditionFn) => (Component) => (props) =>
           </div>
           <button
             type="button"
-            onClick={props.onPaginatedSearch}
+            onClick={props.onLoadMore}
           >
             Try Again
           </button>
@@ -51,7 +51,7 @@ const withInfiniteScroll = (conditionFn) => (Component) =>
     }
 
     onScroll = () =>
-      conditionFn(this.props) && this.props.onPaginatedSearch();
+      conditionFn(this.props) && this.props.onLoadMore();
 
     render() {
       return <Component {...this.props} />;
@@ -59,11 +59,11 @@ const withInfiniteScroll = (conditionFn) => (Component) =>
   }
 
 const paginatedCondition = props =>
-  props.page !== null && !props.isLoading && props.isError;
+  props.startAt !== null && !props.isLoading && props.isError;
 
 const infiniteScrollCondition = props =>
   (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
-  && props.list.length
+  && props.items.length
   && !props.isLoading
   && !props.isError;
 

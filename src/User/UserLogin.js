@@ -6,16 +6,11 @@ import './user.css'
 import Button from 'material-ui/Button'
 import Dialog, {
   DialogActions,
-  DialogContent,
-  DialogContentText,
+  DialogContent, 
   DialogTitle,
 } from 'material-ui/Dialog'
 
 class UserLogin extends Component{
-  constructor(props){
-    super(props);
-  }
-
   state = {
       loginBoxOpen: false,
     };

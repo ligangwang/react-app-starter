@@ -1,4 +1,4 @@
-import {firebase} from '../firebase';
+import {firebase} from './firebaseApp';
 const db = firebase.firestore();
 
 class FirebaseItemProvider{
@@ -8,7 +8,7 @@ class FirebaseItemProvider{
 
   getItems = (startIndex, endIndex)=>{
     let itemQuery
-    if (startIndex==0) {
+    if (startIndex===0) {
       itemQuery = db.collection('items')
       .orderBy('createdOn', 'desc')
       .limit(endIndex-startIndex)

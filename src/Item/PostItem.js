@@ -2,13 +2,11 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {postItem} from './PostItemAction';
-import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import Button from 'material-ui/Button'
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog'
 
