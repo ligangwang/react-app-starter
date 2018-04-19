@@ -61,12 +61,19 @@ const withInfiniteScroll = (conditionFn) => (Component) =>
 const paginatedCondition = props =>
   props.startAt !== null && !props.isLoading && props.isError;
 
-const infiniteScrollCondition = props =>
-  (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
+const infiniteScrollCondition = props => {
+  // if((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)){
+  //   console.log(props.items.length)
+  //   console.log(!props.isLoading)
+  //   console.log(!props.isError)
+  //   console.log(props.hasMoreData)
+  // }
+  return (window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 500)
   && props.items.length
   && !props.isLoading
   && !props.isError
   && props.hasMoreData;
+}
 
 const loadingCondition = props =>
   props.isLoading;

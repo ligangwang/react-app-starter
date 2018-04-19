@@ -28,8 +28,10 @@ class ListItems3 extends Component {
     this.props.showUILoading()
     this.props.fetchItems(this.props.serviceProvider, searchValue, startAt, PAGE_SIZE);
   }
-  onLoadMore = (e) =>
+  onLoadMore = (e) =>{
+    //console.log("loading more")
     this.requestToLoadItems(this.props.searchValue, this.props.startAt + PAGE_SIZE);
+  }
 
   
   render() {
@@ -49,7 +51,7 @@ class ListItems3 extends Component {
           isLoading={this.props.isLoading}
           startAt={this.props.startAt}
           onLoadMore={this.onLoadMore}
-          hasMoreData={this.hasMoreData}
+          hasMoreData={this.props.hasMoreData}
         />
       </div>
     );
@@ -63,10 +65,12 @@ ListItems3.propTypes = {
   startAt: PropTypes.number,
   isLoading: PropTypes.bool,
   isError: PropTypes.bool,
-  searchValue: PropTypes.string
+  searchValue: PropTypes.string,
+  hasMoreData: PropTypes.bool
 }
 
 const mapStateToProps = function(state){
+//  console.log(state.itemState.hasMoreData)
   return {
     items: state.itemState.items,
     newItem: state.itemState.item,
